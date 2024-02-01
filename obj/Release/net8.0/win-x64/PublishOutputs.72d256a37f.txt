@@ -1,0 +1,5 @@
+F:\github\azExfilterateEndPoint\ExfilterateFiles\bin\Release\net8.0\publish\win-x64\ExfilterateFiles.pdb
+F:\github\azExfilterateEndPoint\ExfilterateFiles\bin\Release\net8.0\publish\win-x64\testhost.exe
+F:\github\azExfilterateEndPoint\ExfilterateFiles\bin\Release\net8.0\publish\win-x64\sni.dll
+F:\github\azExfilterateEndPoint\ExfilterateFiles\bin\Release\net8.0\publish\win-x64\SQLite.Interop.dll
+F:\github\azExfilterateEndPoint\ExfilterateFiles\bin\Release\net8.0\publish\win-x64\ExfilterateFiles.exe

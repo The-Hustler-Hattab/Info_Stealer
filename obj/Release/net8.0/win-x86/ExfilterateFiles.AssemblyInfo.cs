@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExfilterateFiles")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9e15813d9fae2e5876544ddb9f2b633eff924e7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25ba0c57916ec694c52bc8e03aee11e00dc29fc5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExfilterateFiles")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExfilterateFiles")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

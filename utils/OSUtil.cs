@@ -131,7 +131,29 @@ namespace WebSocketReverseShellDotNet.utils
             }
         }
 
+        public static void WaitInSeconds(int seconds)
+        {
+            /*Console.WriteLine($"Waiting {seconds} seconds...");*/
+            Thread.Sleep(seconds * 1000); // Convert seconds to milliseconds
+        }
 
+        public static string DecodeBase64(string base64EncodedData)
+        {
+            try
+            {
+                // Convert Base64 string to byte array
+                byte[] base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
+
+                // Convert the byte array to a string
+                return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            }
+            catch (FormatException e)
+            {
+                // Handle the case where the string is not in valid Base64 format
+                Console.WriteLine("Input string is not a valid Base64 string: " + e.Message);
+                return null;
+            }
+        }
 
     }
 }

