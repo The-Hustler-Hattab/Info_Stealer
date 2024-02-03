@@ -4,6 +4,9 @@
 
 This project is designed strictly for educational purposes and ethical security research. It is intended to demonstrate the potential vulnerabilities in Chromium-based browsers and how sensitive data can be at risk. **This tool should only be used in controlled environments, with explicit permission, and for educational or security research purposes.** Unauthorized access to or transmission of personal data is illegal and unethical.
 
+## Youtube Demo
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/qK3GkVzI35o/0.jpg)](https://www.youtube.com/watch?v=qK3GkVzI35o&ab_channel=MohammedHattab)
+
 ## Introduction
 
 The Chromium Data Extractor is a proof-of-concept tool intended for cybersecurity educators and researchers. It simulates how an attacker might extract sensitive data from Chromium-based browsers, such as usernames, passwords, and cookies, and emphasizes the importance of understanding these vulnerabilities to enhance cybersecurity measures.
